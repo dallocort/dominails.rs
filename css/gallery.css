@@ -1,0 +1,69 @@
+@media screen {
+  footer p span[id="validacija"]::after,
+  footer p span[id="prava"]::after {
+    border: 1px solid rgb(244, 244, 244);
+    background-color: rgb(206, 49, 44);
+    background: linear-gradient(
+      to bottom,
+      rgb(237, 27, 0) 0%,
+      rgb(255, 81, 81) 54%,
+      rgb(234, 40, 3) 54%,
+      rgb(252, 50, 0) 55%,
+      rgb(199, 34, 0) 100%
+    );
+    color: rgb(244, 244, 244);
+  }
+  #poz {
+    background: url(/images/bg/pozadina_gallery.svg) center top repeat-x;
+    background-size: 1920px 150px;
+  }
+  footer {
+    background: url(/images/bg/pozadina_gallery_bottom.svg) repeat-x center
+      bottom;
+    background-size: 1920px 150px;
+  }
+  main > section {
+    margin-bottom: 60px;
+  }
+
+  /* START BACK TO TOP BUTTON */
+  html {
+    scroll-behavior: smooth;
+  }
+  .back_totop {
+    display: none;
+    /* js će dodati inline display:inline
+     kada se scroluje ali kad se učita 
+     galerija tada inicijalno none */
+    position: fixed;
+    bottom: 150px;
+    right: 10px;
+    text-decoration: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    -webkit-tap-highlight-color: transparent;
+    /* ovo jer na androidu mi pokazuje oko <a> taga
+     kao ouline kad se tapne, ito je i na meniju
+      glavnom */
+  }
+  .back_totop i {
+    line-height: 42px;
+    /* nije line-height 50px, jer imamo 4px border a
+     posto je 
+    box-sizing:border-box onda za content ostaje 
+    50px-4px-4px=42px */
+    color: white;
+    background-color: rgb(232, 71, 51);
+    background-image: none;
+    border: 4px solid rgb(232, 71, 51);
+    box-sizing: border-box;
+  }
+  .back_totop:hover i {
+    color: rgb(232, 71, 51);
+    background-color: white;
+    border-color: rgb(232, 71, 51);
+  }
+
+  /* END BACK TO TOP BUTTON */
+}

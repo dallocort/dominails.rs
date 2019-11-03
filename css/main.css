@@ -1,0 +1,700 @@
+@media screen {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Lora", serif;
+    background: url(/images/bg/cubes.png) repeat fixed;
+    min-width: 340px;
+    /* jer preko 378px se meni prelama 
+    i layout dobija neki prazan gap sa desne strane a nema potrebe manje od toga 
+    a biće slider samo*/
+  }
+  /* START BODY DEFER LOADING */
+  @supports (display: flex) {
+    /* IE11 ne podržava @supports pa IE<11 isključujem, 
+    inače mi blokira sve neće smaknuti paravan */
+    body::before {
+      content: "";
+      display: block;
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgb(242, 242, 242);
+      z-index: 1;
+      /* z-index dodajem samo zbog contact stranice
+       jer ona ima float elemente i absolute elemente
+       pa je prekrivač ispod njih, to sam video u network 
+       kad mi hvata capture screenshoot kamerica ikona  */
+    }
+    body.ready::before {
+      content: none;
+    }
+  }
+  /* dakle ovde isljučujem IE<=9 jer on ne podržava jQuery,
+  pa sa paravanom ne prikazuje ništa, tj ne priključi se klasa ready u el body,
+  ali zbog @supports IE<=11 neće ni biti paravana jer IE11 ne podržava
+  @support */
+  /* END BODY DEFER LOADING */
+  main {
+    display: block;
+    /* ie 11 ne prepoznaje main izgleda jer reaguje na height tek kad dodam display:block
+    kao što se inline elementi ponašaju ne reaguje na visinu */
+    min-height: calc(100vh - 132px - 150px);
+    /*  da bi mi footer bio on the bottom
+    cela visina brovsera je 100vh umanjeno za konstantne visine:
+    wrapper 132px
+    footer 150px 
+    resto je main i to  min-height */
+    box-sizing: border-box;
+  }
+  /* ovo dodajem da bi izbegao vertical
+  margin collapse jer h2 tag i njegova margin top dodiruje gornju granicu main taga
+  ali ne izlazi van jer ovo sprečava */
+  #poz {
+    background-position: center top;
+  }
+  section::after {
+    display: table;
+    content: "";
+  }
+  section::before {
+    display: table;
+    content: "";
+  }
+}
+main section h1 {
+  text-align: center;
+  margin: 30px 0 50px;
+  color: #979797;
+  font-variant: small-caps;
+  font-family: "Crimson Text", serif;
+  font-size: 1.3em;
+}
+form {
+  width: 400px;
+  padding: 0 20px 0;
+  margin: 0 auto;
+  color: #979797;
+  font-variant: small-caps;
+}
+#frmlevo {
+  width: 130px;
+  float: left;
+  margin-right: 15px;
+  padding-top: 10px;
+}
+#frmlevo figure {
+  margin: 0 auto;
+  padding: 0;
+  width: 100px;
+  height: 100px;
+  /*relative zbog efekta na slici*/
+  position: relative;
+  overflow: hidden;
+}
+#frmlevo figure::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100px;
+  width: 60px;
+
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 45%,
+    rgba(255, 255, 255, 1) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-45deg) translate(-110px, 0);
+  transition: 0s;
+}
+#frmlevo figure:hover::before {
+  transform: skewX(-45deg) translate(170px);
+  transition: 0.7s;
+}
+
+#frmdesno {
+  margin-left: 15px;
+  width: 240px;
+  float: left;
+}
+form::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#frmlevo img {
+  border-radius: 4px;
+}
+
+#frmlevo ul {
+  width: 90px;
+  margin: 0px auto 0;
+}
+#frmlevo p {
+  margin: 28px 0 0;
+  text-align: center;
+}
+#frmlevo p a {
+  color: #979797;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  font-variant: normal;
+  display: block;
+  transition: color 0.2s;
+}
+#frmlevo p a i {
+  color: #979797;
+  border-radius: unset;
+  background-image: none;
+  line-height: normal;
+  margin-bottom: 5px;
+}
+#frmlevo p a:hover,
+#frmlevo p a:focus,
+#frmlevo p a:hover i,
+#frmlevo p a:focus i {
+  color: #607ebe;
+}
+#frmlevo li {
+  display: inline-block;
+  font-size: 22px;
+}
+#frmlevo li a {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  text-align: center;
+}
+#frmlevo i {
+  padding: 0;
+  color: #5c5b5b;
+  line-height: 30px;
+  transition: color 0.2s;
+}
+#frmlevo a:hover i.fa-facebook,
+#frmlevo a:focus i.fa-facebook {
+  color: #3b5998;
+}
+#frmlevo a:hover i.fa-linkedin,
+#frmlevo a:focus i.fa-linkedin {
+  color: #517fa4;
+}
+#frmlevo a:hover i.fa-instagram,
+#frmlevo a:focus i.fa-instagram {
+  color: #517fa4;
+}
+form * input[type="text"],
+form * input[type="email"] {
+  display: inline-block;
+  width: 232px;
+  height: 19px;
+  border: none;
+  border-radius: 4px;
+}
+form * input[type="text"],
+form * input[type="email"],
+textarea {
+  background-color: rgba(240, 240, 240, 0.4);
+  color: rgb(126, 126, 126);
+  box-shadow: 0px 0px 0px 1px rgb(246, 185, 253);
+  padding: 4px;
+}
+label[for="message"] {
+  margin-top: 33px;
+}
+textarea {
+  width: 232px;
+  height: 140px;
+  border: none;
+  resize: vertical;
+  min-height: 95px;
+  max-height: 230px;
+  border-radius: 4px;
+  /*ovde sam naveo da se transition odnosi na b bolor jer
+     bi se inače odnosila na sve pa i na resize textarea!!*/
+}
+form *:focus {
+  outline-style: none;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  background-color: rgb(251, 224, 255);
+}
+button[class="g-recaptcha"] {
+  font-family: "Lora", serif;
+  display: block;
+  margin: 15px auto 0;
+  width: 100px;
+  height: 35px;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: linear-gradient(
+    to bottom,
+    #cb60b3 0%,
+    #c146a1 50%,
+    #a80077 51%,
+    #db36a4 100%
+  );
+  color: #fff;
+  letter-spacing: 1.5px;
+  border-radius: 10px;
+  transition: border-radius 0s, background-color 0s;
+  font-weight: bold;
+}
+button[class="g-recaptcha"]:hover {
+  /* ponavljam styling jer u ms edge dodaje nešto svoje */
+  box-shadow: none;
+  border: none;
+  color: #afafaf;
+}
+button[class="g-recaptcha"]:focus {
+  /* ponavljam styling jer u ms edge dodaje nešto svoje */
+  box-shadow: none;
+  border: none;
+  color: #afafaf;
+}
+textarea::placeholder {
+  color: rgb(170, 170, 170);
+}
+textarea:focus::placeholder {
+  color: rgba(224, 2, 194, 0);
+  /* samo stavljam da je alpha 0 da se ne vidi tekst */
+}
+form label[for="email"] {
+  margin-top: 15px;
+}
+#frmdesno label {
+  display: block;
+  margin-bottom: 3px;
+}
+form + p {
+  margin-top: 40px;
+  color: #979797;
+  text-align: center;
+  display: none;
+  padding: 0 calc((100% - 400px) / 2);
+}
+form + p.hvala {
+  display: block;
+}
+form span.error {
+  color: #dc02bf;
+  display: block;
+}
+nav {
+  padding: 25px 0 55px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 0;
+  /* ovoje hack za <li> jer kada se stave inline-block tada uvek 
+    između ostaje malo space to potiče od fonta jer je to razmak
+     između reči, pa ako nema fonta tj ako je veličina nula 
+     tada nema ni razmaka! ima u svestci još primera kako 
+     ovo može da se reši */ /* SAMO ZA IE <=9 JER NE PODRŽAVA FLEX
+     A TREBA DA CENTRIRAM UL INSIDE NAV */
+  width: 304px;
+  margin: 0 auto 0;
+}
+@supports (display: flex) {
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  ul {
+    width: unset;
+    margin: 0;
+  }
+}
+#wrapper li {
+  display: inline-block;
+  width: 80px;
+  font-size: 16px;
+}
+#wrapper li:nth-child(4) {
+  width: 64px;
+}
+#wrapper a {
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  display: block;
+  margin: 0 0 0 0;
+  text-decoration: none;
+  box-shadow: 0 10px 15px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  background-color: white;
+  /* ovo background-color: white je samo za IE <=9 jer on ne podržava 
+    linear gradient a ostalim browserima neće smetati ovo jer će gradient da preklopi */
+  background-image: linear-gradient(0deg, #ddd, #fff);
+  transition: box-shadow 0.2s;
+  /* stavljam samo box-shadow na transition jer kad počečtno učitava
+     sajt dugmad kao da se transformišu inicijalno u pravi oblik */
+  -webkit-tap-highlight-color: transparent;
+  /* ovo nije standard ali na fonu kad tapnem na link pojavi se 
+    plava pozadina ovo je uklanja
+     https://www.w3cschool.cn/doc_css/css--webkit-tap-highlight-color.html */
+}
+i.fas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  background-image: linear-gradient(0deg, #fff, #ddd);
+  font-size: 1.5em;
+  transition: color 0.2s;
+  color: #5c5b5b;
+}
+#wrapper a:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+#wrapper a.current {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+#wrapper a.current i.fa-home,
+a:hover i.fa-home,
+a:focus i.fa-home {
+  color: #5f8efb;
+}
+#wrapper a.current i.fa-images,
+a:hover i.fa-images,
+a:focus i.fa-images {
+  color: #e94833;
+}
+#wrapper a.current i.fa-info,
+a:hover i.fa-info,
+a:focus i.fa-info {
+  color: #05c745;
+}
+#wrapper a.current i.fa-envelope,
+a:hover i.fa-envelope,
+a:focus i.fa-envelope {
+  color: #e002c2;
+}
+footer {
+  text-align: center;
+  height: 150px; /* iz nekog razloga IE EDGE (ostali IE su ok) dodaje
+    neki gap ispod footera kao da curi neki content pa zato stavljam overflow:hidden i radi */
+  /* overflow: hidden; */
+}
+footer::before {
+  content: "";
+  display: table; /* da bi se <p> element pomenio na dole zbog vertical margin collapse.
+     Ali pazi ovo radi ako je display:table ali ne i ako je display:block!! */
+}
+footer p {
+  font-family: "Crimson Text", serif;
+  cursor: default;
+  /* jer mi na strelici | između spanova kursor ima 
+    oblik cursor:text a neću to */
+  margin: 0;
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 20px;
+  margin-top: 85px;
+}
+footer p span {
+  position: relative;
+  cursor: default;
+  display: inline-block;
+  height: 100%;
+  /* ovo je da bi ceo span uzeo width od p elementa jer se na p:hover 
+    pojavljuje strelica a na span:hover sadržaj pa ako je span manji od 
+    p tada se pojavi strelica ali ne i sadraj */
+  /* inline-block je da p ne bi bio duž celog parenta nego samo oko 
+    sadržaja je na početku ekrana kliknem na p i doda mi strelicu gde nema sadržaja */
+}
+footer p span[id="validacija"]::after {
+  position: absolute;
+  top: -48px;
+  /* ovo to je za IE <=11 za sve ostale je @supports dole navedeno 
+    koje promeni ove vrednosti, IE11 ne podržava calc() unutar transform() funkcije,
+    a pojedinačno podržava, zato on ide sa ostalima IE ovde a 
+    ostali koji podržavaju @supports idu dole */
+  content: attr(data-natpis);
+  left: calc(50% - 190px / 2);
+  width: 190px;
+  border-radius: 10px;
+  padding: 3px;
+  cursor: help;
+  line-height: 16px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  visibility: hidden;
+  font-size: 0.9em;
+  /* ako je samo opacity:0 tada je element after prisutan i dalje fizički 
+    samo ne nevidljiv pa kad stavim kursor preko njega biće vidljiv iako je
+     kursor van natpisa na kome treba da se pojavi tooltip nego hoverujem 
+     preko elementa ::after zato i display:none ovde ide pa posle u hover 
+     vraćam mu display na block */
+  /* ali ako je display:none tada izgleda da neće da prihvati transition 
+    za opacity nego sam zato morao da iskoristim visibility:hidden  
+    umesto display propertia */
+}
+footer p span[id="prava"]::after {
+  position: absolute;
+  top: -42px;
+  /* ovo je samo za IE <= 11 a dole je @support koji menja ovo */
+  content: attr(data-natpis);
+  left: calc(50% - 190px / 2);
+  width: 190px;
+  border: 1px #aaaaaa solid;
+  border-radius: 10px;
+  background-color: #ffffcc;
+  padding: 3px;
+  color: #979797;
+  cursor: help;
+  line-height: 13px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  visibility: hidden;
+  font-size: 0.9em;
+}
+@supports (transform: translateY(calc(-100% - 8px))) {
+  footer p span[id="validacija"]::after,
+  footer p span[id="prava"]::after {
+    top: 0; /* dodajem top:0 jer Chrome pomeri element na dole valjda 
+    da izbegne text, AB elemente ne postavlja na poziciju (0,0), 
+    to IE i Firefox ne rade, pa sa ovim top:0 ga vraćam gde bi i trtebao da bude
+    A drugi razlog je da poništim gore za IE top: -59px; */
+    transform: translateY(
+      calc(-100% - 8px)
+    ); /* IE 11 ne podržava calc() funkciju unutar translateY() funkcije, pojedinačno podržava
+    zato moram koristiti @supports */ /* ova linije znači povući će gore za 100% visine samog tooltipa, i -8px
+     jer sam ::before strelicu povukao na gore za -8px pa da
+     bude iznad strelica */
+  }
+}
+footer p span[id="validacija"]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+footer p span[id="prava"]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+footer span::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+  /* ovo dodaje samo strelicu koja potiče od bordera 5px ali nema contenta 
+    pa se vidi zapravo samo border */
+  opacity: 0;
+  transition: opacity 0.3s;
+  visibility: hidden;
+}
+footer span:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+footer p a:last-child {
+  text-decoration: none;
+  color: white;
+  text-align: left;
+}
+footer a:last-child i {
+  display: inline;
+  /* font-weight: normal; */
+  line-height: initial;
+  background-image: none;
+  /* IE11 ne prepoznaje unset kao vrednost za background-image 
+    pa sam morao staviti none */
+  font-size: inherit;
+  color: white;
+  transition: color 0.5s;
+  /* font-family: inherit; */
+}
+footer a:last-child i::before {
+  content: "";
+}
+footer a:last-child i::after {
+  content: " \f35d";
+  visibility: hidden;
+}
+footer a:last-child:hover i::after,
+footer a:last-child:focus i::after {
+  visibility: visible;
+}
+/* START GALLERY */
+#naslov-galerija {
+  text-align: center;
+  margin-bottom: 50px;
+}
+#gallery {
+  padding: 0 70px;
+  margin: 0 auto 0;
+  /* margin je samo za IE <=11 ali ne smeta gridu! */
+}
+#gallery .box-item {
+  float: left;
+  margin: 5px;
+}
+#gallery::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+#gallery .box-item:hover img {
+  transform: scale(1.04);
+}
+#gallery img {
+  border-radius: 5px;
+  object-fit: fill;
+  transition: 0.4s ease-out;
+  border: none;
+  /* IE ispod 11 tj <=10 dodaju plavi border na img */
+}
+#gallery a {
+  display: block;
+  overflow: hidden;
+  font-size: 0;
+  /* da nisam stavio font-size a tag bi imao veći height od img, slična priča kao za ul <li> */
+  /* zato što scalluujem sliku ali ne želim da img
+    prelazi granice svog containera a to je <a> */
+}
+/* START SUPPORT GRID */
+@supports (display: grid) {
+  #naslov-galerija {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  #gallery .box-item {
+    float: none;
+    margin: unset;
+  }
+  #gallery::after {
+    content: none;
+  }
+  #gallery {
+    padding: 0 70px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-rows: auto;
+    grid-gap: 16px 20px;
+    /* razmak između redova je 16pc za 4px manje
+     jer mi je slika manja za 4px tačno ne znam 
+     zašto od <a> taga po visini
+     bez obzira koliko se smanji ekran img je 
+     uvek za 4px niža od anchor taga */
+  }
+}
+/* END SUPPORT GRID */
+@media only screen and (max-width: 3000px) {
+  /* samo za IE */
+  #gallery {
+    max-width: 1564px;
+  }
+  @supports (display: grid) {
+    #gallery {
+      max-width: unset;
+    }
+  }
+}
+@media only screen and (max-width: 2000px) {
+  /* samo za IE */
+  #gallery {
+    max-width: 1300px;
+  }
+  @supports (display: grid) {
+    #gallery {
+      max-width: unset;
+    }
+  }
+}
+@media only screen and (max-width: 1486px) {
+  #gallery {
+    max-width: 920px;
+  }
+  #gallery img {
+    width: 220px;
+  }
+  @supports (display: grid) {
+    #gallery {
+      grid-template-columns: repeat(auto-fit, 220px);
+      max-width: unset;
+    }
+  }
+}
+@media only screen and (max-width: 1096px) {
+  #gallery {
+    max-width: 800px;
+    /* samo za IE */
+  }
+  #gallery img {
+    width: 190px;
+  }
+  @supports (display: grid) {
+    #gallery {
+      grid-template-columns: repeat(auto-fit, 190px);
+      max-width: unset;
+    }
+  }
+}
+@media only screen and (max-width: 960px) {
+  /* samo za IE */
+  #gallery {
+    max-width: 600px;
+  }
+  @supports (display: grid) {
+    #gallery {
+      max-width: unset;
+    }
+  }
+}
+@media only screen and (max-width: 766px) {
+  #gallery {
+    grid-template-columns: repeat(auto-fit, 120px);
+  }
+  #gallery img {
+    width: 120px;
+  }
+  @media only screen and (max-width: 418px) {
+    #gallery {
+      padding: 0 40px;
+    }
+  }
+}
+/* END GALLERY */
+@media screen and (max-width: 460px) {
+  nav ul {
+    transform: scale(0.85);
+  }
+  #contact form {
+    width: auto;
+  }
+  #frmlevo,
+  #frmdesno {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  #frmlevo p {
+    margin: 25px 0 0;
+  }
+  #frmlevo p:last-child {
+    margin-bottom: 20px;
+  }
+  #frmdesno {
+    margin-top: 20px;
+  }
+}

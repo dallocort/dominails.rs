@@ -1,0 +1,86 @@
+@media screen {
+  footer p span[id="validacija"]::after,
+  footer p span[id="prava"]::after {
+    border: 1px solid rgb(244, 244, 244);
+    background-color: rgb(170, 0, 145);
+    background: linear-gradient(
+      to bottom,
+      rgba(203, 96, 179, 1) 0%,
+      rgba(193, 70, 161, 1) 54%,
+      rgba(168, 0, 119, 1) 55%,
+      rgba(219, 54, 164, 1) 100%
+    );
+    color: rgb(244, 244, 244);
+  }
+  #poz {
+    background: url(/images/bg/pozadina_contact.svg) repeat-x center top;
+    background-size: 1920px 150px;
+  }
+
+  footer {
+    background: url(/images/bg/pozadina_contact_bottom.svg) repeat-x center
+      bottom;
+    background-size: 1920px 150px;
+  }
+  main {
+    position: relative;
+  }
+  .fig_contact {
+    position: absolute;
+  }
+  svg {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(244, 244, 244, 1) 0%,
+      rgba(244, 244, 244, 0.5) 50%,
+      rgba(244, 244, 244, 0) 100%
+    );
+    border-radius: 50%;
+  }
+  #leva_fig {
+    top: calc(50% - 143px / 2);
+    left: 0;
+    right: 70%;
+  }
+  #desna_fig {
+    top: calc(50% - 150px / 2);
+    right: 0;
+    left: 73%;
+  }
+  #leva_fig .nokti,
+  #desna_fig .nokti {
+    fill: #e002c2;
+    stroke: #e002c2;
+    transition: 0.5s linear;
+  }
+  #desna_fig:hover .nokti,
+  #leva_fig:hover .nokti {
+    --nokti: #ff0000;
+    fill: var(--nokti);
+    stroke: var(--nokti);
+  }
+  #leva_fig .ruka,
+  #desna_fig .ruka {
+    stroke: rgb(170, 162, 162);
+    stroke-width: 2;
+    transition: 1.5s linear;
+  }
+}
+
+@media only screen and (max-width: 750px) and (min-width: 461px) {
+  /* samo od 461-750px da se ne vide ruke */
+  #leva_fig,
+  #desna_fig {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  /* da se vide ruke i na najmanjoj veličini */
+  #leva_fig {
+    right: 60%;
+  }
+  #desna_fig {
+    left: 63%;
+  }
+}

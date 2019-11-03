@@ -1,0 +1,67 @@
+@media screen {
+  footer p span[id="validacija"]::after,
+  footer p span[id="prava"]::after {
+    border: 1px solid rgb(244, 244, 244);
+    background-color: rgb(0, 146, 46);
+    background: linear-gradient(
+      to bottom,
+      rgba(4, 176, 60, 1) 1%,
+      rgba(69, 178, 82, 1) 54%,
+      rgba(49, 165, 0, 1) 55%,
+      rgba(4, 174, 59, 1) 100%
+    );
+    color: rgb(244, 244, 244);
+  }
+  #poz {
+    background: url(/images/bg/pozadina_about.svg) repeat-x center top;
+    background-size: 1920px 150px;
+  }
+  footer {
+    background: url(/images/bg/pozadina_about_bottom.svg) repeat-x center bottom;
+    background-size: 1920px 150px;
+  }
+
+  #about p.sert {
+    text-align: justify;
+    line-height: 1.5em;
+    padding: 0 20% 0;
+    color: #979797;
+    max-width: 950px;
+    margin: 0 auto;
+    font-family: "Crimson Text", serif;
+    font-size: 1.2em;
+  }
+  #about figure.sert {
+    width: 60%;
+    max-width: 950px;
+    margin: 50px auto 50px;
+    overflow: hidden;
+  }
+  #about figure.sert a {
+    box-sizing: border-box;
+    padding: 5px;
+    display: block;
+    width: 49%;
+    float: left;
+    background-color: rgb(4, 183, 63);
+    font-size: 0;
+    /* dodaje mali gap, a tag ima veći height nego img, kao za li i ul tagove ista priča */
+  }
+  #about figure.sert a:first-child {
+    margin-right: 2%;
+  }
+  #about img[alt~="sertifikat"] {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 550px) {
+    #about figure.sert a[href] {
+      float: none;
+      margin: 10px auto;
+      padding: 3px;
+    }
+    #about p.sert {
+      text-align: center;
+    }
+  }
+}

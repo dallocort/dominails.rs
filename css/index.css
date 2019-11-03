@@ -1,0 +1,320 @@
+@media screen {
+  footer p span[id="validacija"]::after,
+  footer p span[id="prava"]::after {
+    border: 1px solid rgb(244, 244, 244);
+    background-color: rgb(50, 102, 214);
+    background: linear-gradient(
+      to bottom,
+      rgba(30, 87, 153, 1) 0%,
+      rgba(41, 137, 216, 1) 54%,
+      rgba(32, 124, 202, 1) 55%,
+      rgba(77, 126, 234, 1) 100%
+    );
+    /* moram držati i background-color i gradient jer
+     IE <=9 ne podržava gradient */
+    color: rgb(244, 244, 244);
+  }
+  #poz {
+    background: url(/images/bg/pozadina_home.svg) repeat-x center top;
+    background-size: 1920px 150px;
+  }
+  footer {
+    background: url(/images/bg/pozadina_home_bottom.svg) repeat-x center bottom;
+    background-size: 1920px 150px;
+  }
+  :root {
+    /* --width: 260px;
+    --height: 240px; */
+    --width: 220px;
+    --height: 180px;
+    --gap: 22px;
+    --kol: 6;
+  }
+
+  /* START ODAVDE SAMO ZA IE<=11 */
+  .grid_wrapper {
+    max-width: 1155px;
+    margin: 0 auto 0;
+    padding: 0 0 50px 20px;
+    overflow: hidden;
+    /* deo hexagona izlazi van wrappera pa ne može biti hidden, ali za 
+    IE<=11 je ok jer tamo je float i tako zatvaram floatiranje */
+    /* sve za IE<=11 je se div floatiraju */
+  }
+  .grid_wrapper div {
+    width: 210px;
+    height: 170px;
+    /* za IE<=11 jer ne podržava calc
+    a dole će se promeniti vrednosti
+    za one koji podržavaju calc() */
+    float: left;
+    /* float je za IE<=11 i ne smeta gridu te ne trebam ga ukinuti */
+  }
+  .grid_wrapper > div::after {
+    width: 220px;
+    height: 180px;
+    /* za IE<=11 jer ne podržava calc
+    a dole će se promeniti vrednosti
+    za one koji podržavaju calc() */
+  }
+  @supports (display: grid) {
+    .grid_wrapper {
+      padding: initial;
+      max-width: initial;
+      margin: initial;
+      overflow: initial;
+      /* da odmah ukinem za IE<=11 */
+    }
+    .grid_wrapper div {
+      float: none;
+    }
+  }
+
+  /* END ODAVDE SAMO ZA IE<=11 */
+
+  .grid_wrapper {
+    display: grid;
+    margin: calc(var(--height) * 0.8) auto calc(var(--height) * 0.5);
+    grid-template-columns: repeat(var(--kol), 1fr);
+    grid-auto-rows: var(--height);
+    width: calc(var(--kol) * (var(--width) - var(--width) * 0.15));
+    grid-gap: var(--gap) 0;
+    padding-right: calc(var(--width) * 0.15);
+    /* za vrednost calc(var(--width) * .15) povećevam width kroz padding
+     da bi mi ceo grid bio
+    na centru precizno!! jer za 15% sam smanjio content
+     pa mi toliko viri van contenta jer je margin-right 
+     negativno pa je navučeno */
+  }
+  .grid_wrapper div {
+    width: calc(var(--width) - 10px);
+    height: calc(var(--height) - 10px);
+    position: relative;
+    /* mora zbog ::after prekrivača */
+    text-align: center;
+    padding: 5px;
+    background-color: #fceabb;
+    background: linear-gradient(
+      135deg,
+      #fceabb 0%,
+      #fccd4d 50%,
+      #f8b500 51%,
+      #fbdf93 100%
+    );
+    border-radius: 50%;
+    overflow: hidden;
+    /* zbog floatiranog ::before i span */
+  }
+  .grid_wrapper div p {
+    margin: 0;
+  }
+  .grid_wrapper > div::after {
+    font-variant: small-caps;
+    text-align: center;
+    font-size: 20px;
+    content: "";
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgb(50, 102, 214);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(30, 87, 153, 1) 0%,
+      rgba(32, 124, 202, 1) 64%,
+      rgba(125, 185, 232, 1) 100%
+    );
+    width: var(--width);
+    height: var(--height);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 0% 50%;
+    border-radius: 50%;
+    transition: transform 1.8s ease-in-out;
+  }
+  .grid_wrapper span {
+    display: none;
+  }
+  .grid_wrapper > div:hover::after,
+  .grid_wrapper > div:focus::after {
+    transform: translate(-50%, -50%) rotate(-110deg);
+    transition: transform 0.4s ease-in-out;
+  }
+  .grid_wrapper div:nth-child(2n) {
+    margin-top: calc(
+      var(--height) * -0.5 - var(--gap) / 2
+    ); /* pomeram gore za pola visine ali i samo za pola gap-a da bude baš centrirano */
+    margin-left: calc(var(--width) * -0.15);
+    margin-right: calc(var(--width) * -0.15);
+  }
+  .grid_wrapper h3 {
+    padding: 0 25px 0;
+    text-align: center;
+    /* zbog IE */
+  }
+  .grid_wrapper > div:first-child::after {
+    content: "ko smo mi?";
+  }
+  .grid_wrapper > div:nth-child(2)::after {
+    content: "gde se nalazimo?";
+  }
+  .grid_wrapper > div:nth-child(3)::after {
+    content: "koje usluge pružamo?";
+    font-size: 19px; /* zbog firefoxa natpis na njemu izlazi malo van */
+  }
+  .grid_wrapper > div:nth-child(4)::after {
+    content: "kako zakazati termin?";
+    font-size: 19px;
+  }
+  .grid_wrapper > div:nth-child(5)::after {
+    content: "šta su rekli o nama?";
+  }
+  .grid_wrapper > div:nth-child(6)::after {
+    content: "način plaćanja?";
+  }
+  .grid_wrapper > div:nth-child(7)::after {
+    content: "posebne pogodnosti?";
+    font-size: 19px;
+  }
+  .grid_wrapper > div:nth-child(8)::after {
+    content: "loyalty card";
+  }
+  .grid_wrapper > div:nth-child(9)::after {
+    content: "ko nas je preporučio?";
+    font-size: 18px;
+  }
+  .grid_wrapper > div:nth-child(10)::after {
+    content: "kako da nas kontaktirate?";
+  }
+  .grid_wrapper > div:nth-child(11)::after {
+    content: "da li radimo vikendom?";
+    font-size: 18px;
+  }
+  .grid_wrapper > div:last-child::after {
+    content: "koje nam je radno vreme?";
+  }
+  .grid_wrapper > div:first-child h3 {
+    margin: 8px;
+  }
+  .grid_wrapper > div:nth-child(2) h3 {
+    margin: 4px;
+  }
+  .grid_wrapper > div:nth-child(6) h3 {
+    padding: 0 35px 0;
+  }
+  .grid_wrapper > div:nth-child(4) h3 {
+    margin: 12px;
+    font-size: 0.9em;
+  }
+  .grid_wrapper > div:nth-child(10) h3 {
+    margin-bottom: 10px;
+  }
+  .grid_wrapper > div:nth-child(2) p {
+    padding: 0 5px 0;
+  }
+  @supports (
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)
+  ) {
+    .grid_wrapper div {
+      clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+      border-radius: initial;
+    }
+    .grid_wrapper > div::after {
+      clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+      border-radius: initial;
+    }
+    .grid_wrapper > div::before {
+      content: "";
+      float: left;
+      width: 25%;
+      height: 100%;
+      shape-outside: polygon(0% 0%, 100% 0%, 0% 50%, 100% 100%, 0% 100%);
+    }
+    .grid_wrapper span {
+      display: block;
+      float: right;
+      width: 25%;
+      height: 100%;
+      shape-outside: polygon(100% 0, 100% 100%, 0 100%, 100% 50%, 0% 0%);
+    }
+    #home .grid_wrapper div h3 {
+      text-align: center;
+      padding: initial;
+      /* stavio sam veći specifisity ovde da prekopira selectore za IE */
+    }
+    .grid_wrapper > div:nth-child(2) p {
+      padding: initial;
+    }
+  }
+  @media screen and (max-width: 1215px) {
+    :root {
+      --kol: 4;
+    }
+  }
+  @media screen and (max-width: 880px) {
+    :root {
+      --kol: 4;
+      --width: 150px;
+      --height: 122.727px;
+    }
+    .grid_wrapper > div::after {
+      font-size: 15px !important;
+      padding: 7px;
+      box-sizing: border-box;
+      /* kako dodajem pading tako se on siri vam contenta
+      a text ostaje u jednom redu u ::after gde 
+      na krajevima se ne vidi
+      zato box-sizing da padding smanjuje 
+      content i time se tex prelama jer se 
+      uklapa u manji kontent */
+    }
+    .grid_wrapper div p,
+    .grid_wrapper div h3 {
+      font-size: 11px;
+    }
+    .grid_wrapper > div:first-child h3 {
+      margin-top: 0px;
+    }
+    .grid_wrapper > div:nth-child(2) h3 {
+      margin-top: 0px;
+    }
+    .grid_wrapper > div:nth-child(3) h3 {
+      margin-top: 6px;
+    }
+    .grid_wrapper > div:nth-child(4) h3 {
+      font-size: 9px;
+      margin-top: 2px;
+      margin-bottom: 5px;
+    }
+    .grid_wrapper > div:nth-child(5) h3 {
+      margin-bottom: 18px;
+    }
+    .grid_wrapper > div:nth-child(6) h3 {
+      margin-top: 6px;
+    }
+    .grid_wrapper > div:nth-child(7) h3 {
+      margin-top: 22px !important;
+    }
+    .grid_wrapper > div:nth-child(8) h3 {
+      margin-top: 20px;
+    }
+    .grid_wrapper > div:nth-child(10) h3 {
+      font-size: 10px;
+      margin-bottom: 0px;
+      margin-top: 2px;
+    }
+    .grid_wrapper > div:nth-child(11) h3 {
+      margin-top: 10px;
+    }
+    .grid_wrapper > div:last-child h3 {
+      margin-top: 19px;
+    }
+  }
+  @media screen and (max-width: 620px) {
+    :root {
+      --kol: 2;
+    }
+  }
+}
